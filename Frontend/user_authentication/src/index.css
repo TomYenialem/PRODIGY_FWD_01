@@ -36,13 +36,11 @@ a:hover {
     border-radius: 15px;
     padding: 120px 32px 64px;
     border: 1px solid var(--primary-color);
-    box-shadow: 0 8px 20px rgba(186, 178, 178, 0.15); /* Box shadow for the form wrapper */
+    box-shadow: 0 8px 20px rgba(29, 25, 25, 0.15); /* Box shadow for the form wrapper */
     transition: var(--transition-3s);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-
-    /* Glassmorphism Effect */
     background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
     backdrop-filter: blur(10px); /* Blurred effect */
     -webkit-backdrop-filter: blur(10px); /* Safari support */
