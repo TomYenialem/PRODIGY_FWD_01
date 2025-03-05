@@ -18,7 +18,7 @@ app.use(cors({
 app.use(Login)
 app.use(Register)
 
-app.listen(()=>{
+app.listen(PORT,()=>{
+    console.log(`Server is running on ${PORT}`)
     mongoDb()
-    console.log(`Server running on port ${PORT}`)
 })
