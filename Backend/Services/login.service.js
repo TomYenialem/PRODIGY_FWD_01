@@ -2,9 +2,9 @@ const userInfo = require("../Models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const loginInfo = async (user) => {
+const loginInfo = async (user,res) => {
   try {
-  console.log(user)
+
     if (!user.email || !user.password) {
       return { status: 400, message: "Please fill all the fields" };
     }
@@ -27,6 +27,11 @@ const loginInfo = async (user) => {
     };
     const token = jwt.sign(payloads, process.env.JWT_SECRET, {
       expiresIn: "1h",
+    });
+    res.cookie("token", token, {
+      httpOnly: true, // Cookie can't be accessed via JavaScript
+      secure: process.env.NODE_ENV === "production", // Only secure if in production
+      sameSite: "none", // Cookie will be sent for cross-origin requests
     });
     return { status: 200, message: "Login Successfull", token: token };
   } catch (error) {

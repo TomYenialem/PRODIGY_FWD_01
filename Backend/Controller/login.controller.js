@@ -3,7 +3,7 @@ const login = async (req,res) => {
   try {
     const user = req.body;
 
-    const result = await loginInfo(user);
+    const result = await loginInfo(user,res);
 
     if (result.status ===400)
       return res.status(result.status).json({ message: result.message });
