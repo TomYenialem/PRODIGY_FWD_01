@@ -40,6 +40,13 @@ function Regester() {
   };
 
   return (
+     <div className="wrapper">
+      <div className="form-header">
+          <div className="titles">
+            <div className="title-login"> Register</div>
+          </div>
+
+        </div>
     <form
       className="login-form"
       autoComplete="off"
@@ -54,7 +61,7 @@ function Regester() {
           value={username}
           onChange={(e) => setName(e.target.value)}
         />
-        <label htmlFor="log-email" className="label">
+        <label htmlFor="log-email" className="label text-warning">
           username
         </label>
         <i className="bx bx-envelope icon"></i>
@@ -68,7 +75,7 @@ function Regester() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="log-email" className="label">
+        <label htmlFor="log-email" className="label text-warning">
           Email
         </label>
         <i className="bx bx-envelope icon"></i>
@@ -82,7 +89,7 @@ function Regester() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <label htmlFor="log-pass" className="label">
+        <label htmlFor="log-pass" className="label text-warning">
           Password
         </label>
         <i className="bx bx-lock-alt icon"></i>
@@ -97,7 +104,7 @@ function Regester() {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <label htmlFor="log-pass" className="label">
+        <label htmlFor="log-pass" className="label text-warning">
           Confirm Password
         </label>
         <i className="bx bx-lock-alt icon"></i>
@@ -107,12 +114,13 @@ function Regester() {
           Sign In <i className="bx bx-log-in"></i>
         </button>
       </div>
-      <div className="switch-form">
+      <div className="switch-form ">
         <span>
-          Don't have an account? <Link to="/login">Register</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </span>
       </div>
     </form>
+        </div>
   );
 }
 

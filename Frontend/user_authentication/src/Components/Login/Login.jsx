@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import login from "../../Services/Login.service";
+import {jwtDecode} from 'jwt-decode'
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] =useState("");
+  const navigate=useNavigate()
 
-  const handleLogin = (e) => {
+  const handleLogin = async(e) => {
     e.preventDefault();
     try {
       if(!email || !password){
@@ -22,7 +24,15 @@ function Login() {
       const data={
         email,password
       }
-      login(data).then((res) => toast.success(res.data.message));
+      const response = await login(data);
+      if(response){
+       toast.success(response.data.message)
+       navigate('/')
+        // const token = response.data.token;
+        // const user = jwtDecode(token);
+        // console.log(user)
+      }
+
       
     } catch (error) {
       console.log(error)
@@ -30,6 +40,13 @@ function Login() {
     }
   }
   return (
+    <div className="wrapper">
+      <div className="form-header">
+          <div className="titles">
+            <div className="title-login">Login</div>
+          </div>
+
+        </div>
     <form className="login-form" autoComplete="off" onSubmit={handleLogin}>
       <div className="input-box">
         <input type="text" className="input-field" id="log-email" required 
@@ -37,7 +54,7 @@ function Login() {
         onChange={(e)=>setEmail(e.target.value)}
         
         />
-        <label htmlFor="log-email" className="label">
+        <label htmlFor="log-email" className="label text-warning">
           Email
         </label>
         <i className="bx bx-envelope icon"></i>
@@ -47,16 +64,14 @@ function Login() {
         value={password}
    onChange={(e)=>setPassword(e.target.value)}
         />
-        <label htmlFor="log-pass" className="label">
+        <label htmlFor="log-pass" className="label text-warning">
           Password
         </label>
         <i className="bx bx-lock-alt icon"></i>
       </div>
       <div className="form-cols">
         <div className="col-1"></div>
-        <div className="col-2">
-          <a href="#">Forgot password?</a>
-        </div>
+       
       </div>
       <div className="input-box">
         <button className="btn-submit" id="SignInBtn">
@@ -69,6 +84,8 @@ function Login() {
         </span>
       </div>
     </form>
+
+    </div>
   );
 }
 

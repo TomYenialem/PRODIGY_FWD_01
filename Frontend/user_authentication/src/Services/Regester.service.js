@@ -10,7 +10,7 @@ const register = async (userDatas) => {
     return response
   } catch (error) {
     toast.error(error.response.data.message);
-    throw error;
+    console.log(error)
   }
 };
 export default register;
