@@ -5,7 +5,8 @@ const mongoDb = require("./Db/MongoDb");
 const Login = require("./Routes/Login.routes");
 const Register = require("./Routes/Registe.routes");
 const allUsers = require("./Routes/AllUsers.routes");
-const single_user = require('./Routes/SingleUser.routes')
+const single_user = require("./Routes/SingleUser.routes");
+const logout =require ('./Routes/Logout.routes')
 const PORT = process.env.PORT || 4000;
 const cookieParser = require("cookie-parser");
 
@@ -22,7 +23,8 @@ app.use(
 app.use(Login);
 app.use(Register);
 app.use(allUsers);
-app.use(single_user)
+app.use(single_user);
+app.use(logout)
 
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);

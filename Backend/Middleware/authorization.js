@@ -19,6 +19,7 @@ const auth = async (req, res, next) => {
 
 
       next();
+
     });
   } catch (error) {
     console.error("Error while authenticating", error);
