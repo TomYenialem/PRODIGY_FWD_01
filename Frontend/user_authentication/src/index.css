@@ -46,15 +46,16 @@ a:hover {
     border-radius: 15px;
     padding: 20px 32px 20px;  /* Adjusted padding to ensure content doesn't overflow */
     border: 2px solid var(--primary-color);
-    box-shadow: 0 8px 20px rgba(29, 25, 25, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     transition: var(--transition-3s);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    margin: 50px auto;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(100px);
+    margin: 40px auto;
+    
   
 }
 
@@ -140,6 +141,10 @@ a:hover {
     color: white !important;
     font-size: 16px;
     padding: 10px;
+}
+.description span{
+  font-weight: 900;
+  color: var(--primary-color);
 }
 
 
@@ -323,6 +328,11 @@ button:disabled{
         flex-direction: column;
         gap: 10px;
     }
+    .category-item:hover {
+            background-color: var(--primary-color) !important;
+            color: rgb(100, 46, 46) !important;
+    }
+    .footer{}
 
 /* .home{
         background-color: rgba(255, 255, 255, 0.1);

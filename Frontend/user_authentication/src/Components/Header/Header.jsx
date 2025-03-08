@@ -55,9 +55,7 @@ function Header() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto d-flex align-items-end gap-4">
               {" "}
-              <Nav.Link href="#home" className="text-white">
-                Home
-              </Nav.Link>
+        
               <Nav.Link className="text-white" onClick={handleAdmin}>
                 Admin
               </Nav.Link>

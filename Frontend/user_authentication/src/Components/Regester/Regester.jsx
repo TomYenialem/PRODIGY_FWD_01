@@ -95,7 +95,7 @@ const navigate=useNavigate()
         </div>
         <div className="input-box">
           <input
-            type={`${showPass?"text":"password"}`}
+            type={`${showPass ? "text" : "password"}`}
             className="input-field"
             id="log-pass"
             required
@@ -106,7 +106,10 @@ const navigate=useNavigate()
             Password
           </label>
           <i className="bx bx-lock-alt icon"></i>
-          <div className="eye_icon" onClick={()=>setShowPass(prev=>!prev)}>
+          <div
+            className="eye_icon"
+            onClick={() => setShowPass((prev) => !prev)}
+          >
             {showPass ? <FaEyeSlash /> : <FaRegEye />}
           </div>
         </div>
@@ -136,7 +139,11 @@ const navigate=useNavigate()
               fontWeight: loading ? "bold" : "normal",
             }}
           >
-            {loading ? <MoonLoader color="red" size={12} /> : "Sign In"}
+            {loading ? (
+              <MoonLoader color="red" size={12} />
+            ) : (
+              <strong className="text-white">Sign In</strong>
+            )}
 
             <i className="bx bx-log-in"></i>
           </button>

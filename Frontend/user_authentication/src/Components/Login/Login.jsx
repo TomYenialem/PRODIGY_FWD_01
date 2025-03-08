@@ -105,7 +105,10 @@ function Login() {
             {loading ? (
               <MoonLoader color="red" size={12} /> // White spinner, bigger size
             ) : (
-              "Login"
+              <strong className="text-white">
+
+                Login
+              </strong>
             )}
             <i className="bx bx-log-in"></i>
           </button>
