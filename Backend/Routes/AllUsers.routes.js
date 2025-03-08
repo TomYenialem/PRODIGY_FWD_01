@@ -4,6 +4,6 @@ const allUsers=require('../Controller/AllUsers.controller')
 const { auth, isAdmin} =require('../Middleware/authorization')
 
 
-routes.get('/alluser',[auth,isAdmin],allUsers);
+routes.get('/alluser',[auth],allUsers);
 
 module.exports=routes;

@@ -18,7 +18,7 @@ const rejesterInfo = async (user) => {
     if (!checkPassword) {
       return { status: 400, message: "Password not matched" };
     }
-    const userRole = user.role || "customer";
+    const userRole = user.role || "Visitor";
     const newUser = await userInfo({
       username: user.username,
       email: user.email,
