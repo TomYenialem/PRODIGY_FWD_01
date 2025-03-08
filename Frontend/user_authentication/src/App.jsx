@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
 import {Toaster} from 'react-hot-toast'
 import Home from "./Components/Home/Home";
+import Admin from "./Components/Admin/Admin";
 
 function App() {
    const [isLogin, setIsLogin] = useState(false);
@@ -20,6 +21,7 @@ function App() {
       </div> */}
         <Routes>
           <Route path ='/' element={<Home/>}/>
+          <Route path="/admin" element={<Admin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Regester />} />
         </Routes>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -9,42 +9,76 @@ import {
   Badge,
 } from "react-bootstrap";
 import { useContextApi } from "../../Contexts/UseContext";
+import fetchAllVistors from "../../Services/Allusers.service";
+import formatTime from "../../Util/formatTime";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 function Main() {
+  const { singleData } = useContextApi();
+  const [userData, setUserData] = useState([]);
+  const { formatTimes } = formatTime();
 
-    const {singleUser}=useContextApi()
   const galleryItems = [
     {
       id: 1,
-      category: "Workshop",
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000",
+      category: "Dictionary",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx4Qpmr6V_NdvXE0TCUwtCdapB69Y2J2M1Cw&s",
+      link: "https://utilityblogs1.netlify.app/dictinary",
     },
     {
       id: 2,
-      category: "Engine Chamber",
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000",
+      category: "Weather",
+      img: "https://play-lh.googleusercontent.com/pCQw51XRP4UPr-FCYDjvNnEpFa0HDGJjjLDldN3rmw4KkwhqPu0PZXE8EopmAxzH9mQ",
+      link: "https://utilityblogs1.netlify.app/weather",
     },
     {
       id: 3,
-      category: "Team Work",
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000",
+      category: "Crypto",
+      img: "https://xau.ca/wp-content/uploads/2024/10/2-3.png",
+      link: "https://utilityblogs1.netlify.app/crypto%20price.html",
     },
     {
       id: 4,
-      category: "Bodyshop",
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000",
+      category: "Have Coffee",
+      img: "https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FRecipes%2F2023-10-french-press-coffee%2Ffrench-press-coffee-052",
+      link: "https://coffeehouse11.netlify.app/",
     },
     {
       id: 5,
-      category: "Office",
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000",
+      category: "Dad Jokes",
+      img: "https://punnyhub.com/wp-content/uploads/2024/08/Emoji-Jokes-and-Puns_1-768x768.webp",
+      link: "https://utilityblogs1.netlify.app/dadjokes",
     },
     {
       id: 6,
-      category: "Waiting Room",
-      img: "https://images.unsplash.com/photo-1575936123452-b67c3203c357?fm=jpg&q=60&w=3000",
+      category: "Your City",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLJyaYxKZOLgjF14WZEcRGjlTpFlAFK94d2A&s",
+      link: "https://utilityblogs1.netlify.app/city",
+    },
+    {
+      id: 7,
+      category: "Play Old Games",
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsTIvwceDW_xk9v9bQFncdmH4CHBvDGi9FVg&s",
+      link: "https://nokiasnakegames.netlify.app/",
     },
   ];
+
+  const getAllUsers = () => {
+    try {
+      fetchAllVistors().then((response) => {
+        setUserData(response.data.data.slice(0, 6));
+        console.log(response);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
 
   const [activeCategory, setActiveCategory] = useState("All Works");
 
@@ -60,10 +94,10 @@ function Main() {
         <div className="container">
           <div className="flex">
             <div>
-              <h1 className="fw-blod">Welcome {singleUser?.username}</h1>
+              <h1 className="fw-blod">Welcome {singleData?.name}</h1>
             </div>
             <div>
-                <h3>status:{singleUser?.role}</h3>
+              <h3>status:{singleData?.role}</h3>
             </div>
           </div>
 
@@ -88,12 +122,13 @@ function Main() {
             <ListGroup>
               {[
                 "All Works",
-                "Workshop",
-                "Engine Chamber",
-                "Team Work",
-                "Bodyshop",
-                "Office",
-                "Waiting Room",
+                " Dictionary",
+                "Weather",
+                "Crypto",
+                "Have Coffee",
+                "Dad Jokes",
+                "Your City",
+                "Play Old Games",
               ].map((category, index) => (
                 <ListGroup.Item
                   key={index}
@@ -112,18 +147,17 @@ function Main() {
 
             {/* Active Users Section */}
             <div className="mt-4 p-3 bg-light rounded">
-              <h5 className="fw-bold text-center">Active Users</h5>
+              <h5 className="fw-bold text-center">Recent Visitors</h5>
               <ListGroup>
-                {["John Doe", "Jane Smith", "Michael Brown", "Emily Davis"].map(
-                  (user, idx) => (
-                    <ListGroup.Item
-                      key={idx}
-                      className="d-flex justify-content-between align-items-center"
-                    >
-                      {user} <Badge bg="success">Online</Badge>
-                    </ListGroup.Item>
-                  )
-                )}
+                {userData.map((user, idx) => (
+                  <ListGroup.Item
+                    key={idx}
+                    className="d-flex justify-content-between align-items-center"
+                  >
+                    {user?.username}
+                    <Badge bg="warning">{formatTimes(user?.createdAt)}</Badge>
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
             </div>
           </Col>
@@ -134,15 +168,25 @@ function Main() {
               {filteredItems.map((item) => (
                 <Col key={item.id} md={4}>
                   <Card className="gallery-card border-0 shadow-sm">
-                    <Card.Img
-                      variant="top"
+                    {/* Replace Card.Img with LazyLoadImage */}
+                    <LazyLoadImage
                       src={item.img}
+                      alt={item.category}
+                      effect="blur" // Adds a blur effect while loading
                       className="img-fluid rounded"
+                      width="100%"
+                      height="auto"
                     />
                     <div className="gallery-overlay">
-                      <Button href={item.img} variant="light">
-                        View Image
+                      <Button href={item.img} className="bg-warning">
+                        <a href={`${item.link}`}>
+                        <FaExternalLinkAlt color="white" size={25} />
+                        </a>
+                        <br />
                       </Button>
+                      <div>
+                        <small className="text-white">{item.category}</small>
+                      </div>
                     </div>
                     <Card.Body className="text-center">
                       <Card.Title className="fw-bold">

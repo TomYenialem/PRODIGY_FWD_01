@@ -293,6 +293,36 @@ a:hover {
 .footer{
     background-color:oklch(0.852 0.199 91.936);
 }
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+.loading{
+    color:yellow !important;
+    font-weight: 900;
+}
+button:disabled{
+    color:yellow;
+}
+.input-field{
+    color: white;
+}
+.eye_icon{
+    position: absolute;
+    top:10px;
+    right: 30px;
+    cursor: pointer;
+    color: white;
+    }
+    .gallery-overlay{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+    }
 
 /* .home{
         background-color: rgba(255, 255, 255, 0.1);

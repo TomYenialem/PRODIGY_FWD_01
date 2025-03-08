@@ -2,17 +2,23 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import login from "../../Services/Login.service";
-import {jwtDecode} from 'jwt-decode'
+import { MoonLoader } from "react-spinners"; // Correct 
+import { FaRegEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 
 function Login() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] =useState("");
-  const navigate=useNavigate()
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+    const[showPass,setShowPass]=useState(false)
 
-  const handleLogin = async(e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+
     try {
-      if(!email || !password){
+      if (!email || !password) {
         toast.error("Please fill all the fields");
         return;
       }
@@ -21,70 +27,95 @@ function Login() {
         toast.error("Invalid email address");
         return;
       }
-      const data={
-        email,password
-      }
-      const response = await login(data);
-      if(response){
-       toast.success(response.data.message)
-       navigate('/')
-        // const token = response.data.token;
-        // const user = jwtDecode(token);
-        // console.log(user)
-      }
 
-      
+      const response = await login({ email, password });
+
+      if (response) {
+        toast.success(response.data.message);
+        navigate("/")
+        if (location.pathname === "/login") {
+          // navigate('/admin');
+          // window.location.replace('/admin');
+          // To home for now
+          window.location.replace("/");
+        } else {
+          window.location.reload();
+        }
+
+      }
     } catch (error) {
-      console.log(error)
-      
+      toast.error(error.response?.data?.message || "Login failed");
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-  }
+  };
+
   return (
     <div className="wrapper">
       <div className="form-header">
-          <div className="titles">
-            <div className="title-login">Login</div>
-          </div>
-
+        <div className="titles">
+          <div className="title-login">Login</div>
         </div>
-    <form className="login-form" autoComplete="off" onSubmit={handleLogin}>
-      <div className="input-box">
-        <input type="text" className="input-field" id="log-email" required 
-        value={email}
-        onChange={(e)=>setEmail(e.target.value)}
-        
-        />
-        <label htmlFor="log-email" className="label text-warning">
-          Email
-        </label>
-        <i className="bx bx-envelope icon"></i>
       </div>
-      <div className="input-box">
-        <input type="password" className="input-field" id="log-pass" required 
-        value={password}
-   onChange={(e)=>setPassword(e.target.value)}
-        />
-        <label htmlFor="log-pass" className="label text-warning">
-          Password
-        </label>
-        <i className="bx bx-lock-alt icon"></i>
-      </div>
-      <div className="form-cols">
-        <div className="col-1"></div>
-       
-      </div>
-      <div className="input-box">
-        <button className="btn-submit" id="SignInBtn">
-          Login  <i className="bx bx-log-in"></i>
-        </button>
-      </div>
-      <div className="switch-form">
-        <span>
-          Don't have an account? <Link to="/register">Register</Link>
-        </span>
-      </div>
-    </form>
-
+      <form className="login-form" autoComplete="off" onSubmit={handleLogin}>
+        <div className="input-box">
+          <input
+            type="text"
+            className="input-field"
+            id="log-email"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label htmlFor="log-email" className="label text-warning">
+            Email
+          </label>
+          <i className="bx bx-envelope icon"></i>
+        </div>
+      
+              <div className="input-box">
+                  <input
+                    type={`${showPass?"text":"password"}`}
+                    className="input-field"
+                    id="log-pass"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <label htmlFor="log-pass" className="label text-warning">
+                    Password
+                  </label>
+                  <i className="bx bx-lock-alt icon"></i>
+                  <div className="eye_icon" onClick={()=>setShowPass(prev=>!prev)}>
+                    {showPass ? <FaEyeSlash /> : <FaRegEye />}
+                  </div>
+                </div>
+        <div className="input-box">
+          <button
+            className="btn-submit"
+            id="SignInBtn"
+            disabled={loading}
+            style={{
+              backgroundColor: loading ? "#FFD700" : "", // Yellow when disabled
+              color: loading ? "black" : "black", // Black text when disabled
+              fontWeight: loading ? "bold" : "normal", // Bold text when disabled
+            }}
+          >
+            {loading ? (
+              <MoonLoader color="red" size={12} /> // White spinner, bigger size
+            ) : (
+              "Login"
+            )}
+            <i className="bx bx-log-in"></i>
+          </button>
+        </div>
+        <div className="switch-form">
+          <span>
+            Don't have an account? <Link to="/register">Register</Link>
+          </span>
+        </div>
+      </form>
     </div>
   );
 }
