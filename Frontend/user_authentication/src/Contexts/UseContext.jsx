@@ -22,7 +22,7 @@ function UseContext({ children }) {
       setSingleData(response.data);
     } catch (error) {
       console.log(error.response.data.message);
-      // navigate("/login");
+      navigate("/login");
     }
   };
 
