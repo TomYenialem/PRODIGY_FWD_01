@@ -28,7 +28,7 @@ const loginInfo = async (user, res) => {
     });
     res.cookie("token", token, {
       httpOnly: true, // Cookie can't be accessed via JavaScript
-      secure: process.env.NODE_ENV === "production", // Only secure if in production
+      secure: process.env.NODE_ENV === "production", 
       sameSite: "none", // Cookie will be sent for cross-origin requests
     });
     return { status: 200, message: "Login Successfull", token: token };
