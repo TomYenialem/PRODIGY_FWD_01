@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const auth = async (req, res, next) => {
   try {
     // Retrieve token from the cookies
-    const token = req.cookies.token;
+    const token = req.cookies?.token;
 
     if (!token) {
       return res.status(401).json({ message: "Token not found" });
@@ -14,12 +14,9 @@ const auth = async (req, res, next) => {
         return res.status(401).json({ message: "Invalid token" });
       }
 
-     
       req.user = decoded;
 
-
       next();
-
     });
   } catch (error) {
     console.error("Error while authenticating", error);
@@ -27,16 +24,15 @@ const auth = async (req, res, next) => {
   }
 };
 
-
 const isAdmin = async (req, res, next) => {
-    // Check if the user is an admin
-    if (!req.user ||!req.user.role || req.user.role !== "admin") {
-      return res.status(403).json({ message: "Unauthorized access" });
-    }
-    next();
-}
+  // Check if the user is an admin
+  if (!req.user || !req.user.role || req.user.role !== "admin") {
+    return res.status(403).json({ message: "Unauthorized access" });
+  }
+  next();
+};
 
 module.exports = {
-    auth,
-    isAdmin
-}
+  auth,
+  isAdmin,
+};
