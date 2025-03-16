@@ -16,10 +16,14 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "https://prodigy-fwd-01-6.onrender.com",
+      "https://prodigy-fwd-01-7.onrender.com",
+    ],
     credentials: true,
   })
 );
+
 app.use(router);
 
 // Serve static files from the frontend
