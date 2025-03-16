@@ -34,9 +34,6 @@ function Login() {
         toast.success(response.data.message);
         navigate("/")
         if (location.pathname === "/login") {
-          // navigate('/admin');
-          // window.location.replace('/admin');
-          // To home for now
           window.location.replace("/");
         } else {
           window.location.reload();

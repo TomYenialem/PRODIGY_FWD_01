@@ -26,7 +26,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    height: 100vh;  
+
 }
 
 /* REUSABLE ELEMENTS */
@@ -42,7 +42,8 @@ a:hover {
 /* WRAPPER */
 .wrapper {
     position: relative;
-    width: 500px;
+    width: 90%;
+    max-width: 500px;
     border-radius: 15px;
     padding: 20px 32px 20px;  /* Adjusted padding to ensure content doesn't overflow */
     border: 2px solid var(--primary-color);
@@ -54,7 +55,10 @@ a:hover {
     background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(100px);
-    margin: 40px auto;
+   
+    margin-top: 70px !important;
+    margin: 0 auto;
+    
     
   
 }
@@ -319,7 +323,9 @@ button:disabled{
     top:10px;
     right: 30px;
     cursor: pointer;
-    color: white;
+    color: rgb(250, 234, 4);
+    font-weight: bolder;
+
     }
     .gallery-overlay{
         display: flex;
@@ -346,4 +352,11 @@ button:disabled{
     .wrapper {
         margin: 20px;
     }
+    .wrapper {
+    margin-top: 100px !important;
+    margin: 0 auto;
+    
+    
+  
+}
 }
