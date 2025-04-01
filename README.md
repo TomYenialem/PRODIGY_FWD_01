@@ -1,6 +1,7 @@
 # Authentication & Authorization Application
 
-🔗 **Live Demo:** [Visit the Application](https://prodigy-fwd-01-7.onrender.com/)
+🔗 **Live Demo:** [Visit the Application](https://prodigy-fwd-01-7.onrender.com/)<img width="950" alt="att" src="https://github.com/user-attachments/assets/f5f09885-ed34-4c92-8317-bd8b084a98b1" />
+
 
 This project is a **secure authentication and authorization** system built using **React** for the frontend and **Node.js, Express, and MongoDB** for the backend. It provides a robust login and registration system with **JWT-based authentication**, encrypted passwords, and session management for enhanced security.
 
