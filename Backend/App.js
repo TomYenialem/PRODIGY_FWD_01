@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const mongoDb = require("./Db/MongoDb");
-const path =require('path')
+const path = require("path");
 
 const PORT = process.env.PORT || 4000;
 const cookieParser = require("cookie-parser");
@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
+      "http://localhost:5174",
       "https://prodigy-fwd-01-6.onrender.com",
       "https://prodigy-fwd-01-7.onrender.com",
     ],
