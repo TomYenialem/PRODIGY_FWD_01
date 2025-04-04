@@ -61,6 +61,7 @@ function Login() {
             type="text"
             className="input-field"
             id="log-email"
+            name="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -77,6 +78,7 @@ function Login() {
                     className="input-field"
                     id="log-pass"
                     required
+                    name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />

@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import register from "../../Services/Regester.service";
 import toast from "react-hot-toast";
 import { MoonLoader } from "react-spinners";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 
-
-
 function Regester() {
   const [username, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const[showPass,setShowPass]=useState(false)
-    const [loading, setLoading] = useState(false);
-const navigate=useNavigate()
+  const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const handleRegistration = (e) => {
     e.preventDefault();
-   setLoading(true)
+    setLoading(true);
     try {
       if (!username || !email || !password || !confirmPassword) {
         toast.error("Please fill all the fields");
@@ -34,22 +32,20 @@ const navigate=useNavigate()
         return;
       }
       const data = { username, email, password };
-      if (password!== confirmPassword) {
+      if (password !== confirmPassword) {
         toast.error("Passwords do not match");
         return;
       }
-  
-      register(data).then((res) =>{
-        toast.success(res.data.message)
-       navigate("/login")
-      }
-      )
+
+      register(data).then((res) => {
+        toast.success(res.data.message);
+        navigate("/login");
+      });
     } catch (error) {
       toast.error(error.data.message);
-      console.log(error)
-    }
-    finally{
-      setLoading(false)
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -70,6 +66,7 @@ const navigate=useNavigate()
             type="text"
             className="input-field"
             id="name"
+            name="username"
             required
             value={username}
             onChange={(e) => setName(e.target.value)}
@@ -84,6 +81,7 @@ const navigate=useNavigate()
             type="email"
             className="input-field"
             id="log-email"
+            name="email"
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -99,6 +97,7 @@ const navigate=useNavigate()
             className="input-field"
             id="log-pass"
             required
+            name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -120,6 +119,7 @@ const navigate=useNavigate()
             className="input-field"
             id="confirm-password"
             required
+            name="confirmPassword"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
